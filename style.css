@@ -233,6 +233,17 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
+}
+
+.fav_elem_selector{
+    height: 30px;
+    width: 30px;
+    /*background-color: white;*/
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .unactive{
@@ -261,6 +272,34 @@ main {
 .favSelector img{
     height: 15px !important;
     width: 15px !important;
+}
+
+.favElem{
+    border-bottom: 1px solid #aeaaa1;
+    height: 150px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fav_elem_img{
+    padding-left:10px;
+}
+.fav_elem_img img{
+    border-radius: 5px;
+}
+
+.fav_elem_action{
+    padding-right:10px;
+}
+
+.fav_elem_text{
+    max-width: 150px;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
 }
 
 .resultsContainer {
@@ -367,6 +406,29 @@ main {
     padding: 40px;
     font-size: 18px;
     color: #d32f2f;
+}
+
+
+
+.book_title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-family: "Playfair Display", serif;
+    line-height: 1.3;
+}
+
+
+.fav_elem_author {
+    font-size: 10px;
+    color: #666;
+    font-family: 'Roboto', serif;
+}
+
+.fav_elem_year {
+    font-size: 8px;
+    color: #999;
+    font-family: 'Roboto', serif;
 }
 
 /* Адаптивность */

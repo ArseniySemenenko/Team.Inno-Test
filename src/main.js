@@ -101,22 +101,22 @@ function createBookCard(book) {
     const author = authors[0];
     
     //Publication year
-    const year = book.first_publish_year || '';
+  const year = book.first_publish_year || '';
 
-  /*
-  <img
-    src=${fav.has(truncatedTitle)?"./public/active.png":"./public/unactive.png"}
-    height="5"
-    width="5"
-    class="favSwitcher"
-    id="${truncatedTitle}"
-  >
-  */
+  const book_id = {
+    cover: coverUrl,
+    title: truncatedTitle.replaceAll(" " , "_"),
+    author: author.replaceAll(" " , "_"),
+    year:year,
+  }
+
+  const book_id_str = JSON.stringify(book_id);
+  console.log(book_id_str);
   
     //Create HTML of book card
     card.innerHTML = `
         <div class="book_cover">
-            <div class="favSelector favSwitcher ${fav.has(truncatedTitle)?"active":"unactive"}" id="${truncatedTitle}">
+            <div class="favSelector favSwitcher ${fav.has(book_id_str)?"active":"unactive"}" id=${book_id_str}>
             </div>
             ${coverUrl 
                 ? `<img src="${coverUrl}" alt="${truncatedTitle}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%25\' height=\'100%25\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23667eea\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'white\' font-size=\'14\'%3ENo Cover%3C/text%3E%3C/svg%3E'">` 
@@ -191,12 +191,6 @@ async function loadPopularBooks() {
 //Load books at start
 loadPopularBooks();
 
-//Fav bar
-let favList = document.getElementById("favList");
-
-//Favourites list
-let fav = new Set;
-
 document.addEventListener('click', (e) => {
   //alert(e.target.classList.contains("favSwitcher"));
   if (e.target.classList.contains("favSwitcher")) {
@@ -208,7 +202,7 @@ document.addEventListener('click', (e) => {
       displayFavs(fav);
     }
     else {
-      fav.add(e.target.getAttribute("id"));
+      fav.add(e.target.getAttribute("id").trim());
       let elem = document.getElementById(e.target.getAttribute("id"));
       elem.classList.toggle("unactive");
       elem.classList.toggle("active");
@@ -218,22 +212,46 @@ document.addEventListener('click', (e) => {
 });
 
 function createFav(elem) {
-  const fav = document.createElement('div');
-
-  fav.className = "favElem";
-  fav.className = "themeContainer";
-  fav.className = "light";
-  fav.innerHTML = `
-    <div class="themeContainer ${theme?"light":"black"}">
-      <h1>${elem}</h1>
+  const newFav = document.createElement('div');
+  const obj = JSON.parse(elem);
+  newFav.className = "favElem";
+  newFav.className = "themeContainer";
+  newFav.className = "light";
+  console.log(obj.cover);
+  newFav.innerHTML = `
+    <div class="favElem themeContainer ${theme?"light":"black"}">
+      <div class="fav_elem_img" >
+        <img
+          src="${obj.cover}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%25\' height=\'100%25\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23667eea\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'white\' font-size=\'14\'%3ENo Cover%3C/text%3E%3C/svg%3E'"
+          height="120"
+          width="70"
+        >
+      </div>
+      <div class="fav_elem_text">
+        <h3 class="fav_elem_title">${obj.title.replaceAll("_" , " ")}</h3>
+        <h5 class="fav_elem_author">${obj.author.replaceAll("_" , " ")}</h5>
+        <h5 class="fav_elem_year">Published: ${obj.year}</h5>
+      </div>
+      <div class="fav_elem_action">
+        <div class="fav_elem_selector favSwitcher ${fav.has(elem)?"active":"unactive"}" id=${elem}>
+      </div>
+      </div>
     </div>
     `;
-  return fav;
+  return newFav;
+  //<h1>${obj.title}</h1>
 }
 
 function displayFavs(arr) {
   favList.innerHTML = '';
+  console.log(arr);
   arr.forEach(elem => {
     favList.appendChild(createFav(elem));
   });
 }
+
+//Fav bar
+let favList = document.getElementById("favList");
+
+//Favourites list
+let fav = new Set;
