@@ -104,7 +104,7 @@ function createBookCard(book) {
     //Create HTML of book card
     card.innerHTML = `
         <div class="book_cover">
-            <div class="favSelector favSwitcher ${fav.has(book_id_str)?"active":"unactive"}" id=${book_id_str}>
+            <div class="favSelector favSwitcher ${fav.includes(book_id_str)?"active":"unactive"}" id=${book_id_str}>
             </div>
             ${coverUrl 
                 ? `<img src="${coverUrl}" alt="${truncatedTitle}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%25\' height=\'100%25\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23667eea\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'white\' font-size=\'14\'%3ENo Cover%3C/text%3E%3C/svg%3E'">` 
@@ -181,18 +181,21 @@ loadPopularBooks();
 
 document.addEventListener('click', (e) => {
   if (e.target.classList.contains("favSwitcher")) {
-    if (fav.has(e.target.getAttribute("id"))) {
+    if (fav.includes(e.target.getAttribute("id"))) {
       let elem = document.getElementById(e.target.getAttribute("id"));
       elem.classList.toggle("unactive");
       elem.classList.toggle("active");
-      fav.delete(e.target.getAttribute("id"));
+      //fav.delete(e.target.getAttribute("id"));
+      fav = fav.filter(elem => elem != e.target.getAttribute("id"));
+      console.log(fav);
       displayFavs(fav);
     }
     else {
-      fav.add(e.target.getAttribute("id").trim());
+      fav.push(e.target.getAttribute("id"));
       let elem = document.getElementById(e.target.getAttribute("id"));
       elem.classList.toggle("unactive");
       elem.classList.toggle("active");
+      console.log(fav);
       displayFavs(fav);
     }
   }
@@ -219,7 +222,7 @@ function createFav(elem) {
         <h5 class="fav_elem_year">Published: ${obj.year}</h5>
       </div>
       <div class="fav_elem_action">
-        <div class="fav_elem_selector favSwitcher ${fav.has(elem)?"active":"unactive"}" id=${elem}>
+        <div class="fav_elem_selector favSwitcher ${fav.includes(elem)?"active":"unactive"}" id=${elem}>
       </div>
       </div>
     </div>
@@ -238,4 +241,4 @@ function displayFavs(arr) {
 let favList = document.getElementById("favList");
 
 //Favourites list
-let fav = new Set;
+let fav = [];
