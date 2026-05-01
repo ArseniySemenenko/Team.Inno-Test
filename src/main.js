@@ -4,6 +4,7 @@ const searchButton = document.getElementById('searchButton');
 const resultsContainer = document.getElementById('resultsContainer');
 const theme_button = document.getElementById("theme_button");
 
+
 //every div thet use theme
 const containers = document.getElementsByClassName("themeContainer");
 //true - light, false - black
@@ -83,7 +84,7 @@ function createBookCard(book) {
   const card = document.createElement('div');
   card.className = "themeContainer";
   card.className = "light";
-  card.className = 'book_card';
+  card.className = 'book_card'; 
     
     //Book cover
     const coverId = book.cover_i;
@@ -101,11 +102,22 @@ function createBookCard(book) {
     
     //Publication year
     const year = book.first_publish_year || '';
-    
+
+  /*
+  <img
+    src=${fav.has(truncatedTitle)?"./public/active.png":"./public/unactive.png"}
+    height="5"
+    width="5"
+    class="favSwitcher"
+    id="${truncatedTitle}"
+  >
+  */
+  
     //Create HTML of book card
     card.innerHTML = `
         <div class="book_cover">
-            
+            <div class="favSelector favSwitcher ${fav.has(truncatedTitle)?"active":"unactive"}" id="${truncatedTitle}">
+            </div>
             ${coverUrl 
                 ? `<img src="${coverUrl}" alt="${truncatedTitle}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%25\' height=\'100%25\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23667eea\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'white\' font-size=\'14\'%3ENo Cover%3C/text%3E%3C/svg%3E'">` 
                 : `<div class="no_cover"><h1>No Cover Available</h1></div>`
@@ -179,3 +191,49 @@ async function loadPopularBooks() {
 //Load books at start
 loadPopularBooks();
 
+//Fav bar
+let favList = document.getElementById("favList");
+
+//Favourites list
+let fav = new Set;
+
+document.addEventListener('click', (e) => {
+  //alert(e.target.classList.contains("favSwitcher"));
+  if (e.target.classList.contains("favSwitcher")) {
+    if (fav.has(e.target.getAttribute("id"))) {
+      let elem = document.getElementById(e.target.getAttribute("id"));
+      elem.classList.toggle("unactive");
+      elem.classList.toggle("active");
+      fav.delete(e.target.getAttribute("id"));
+      displayFavs(fav);
+    }
+    else {
+      fav.add(e.target.getAttribute("id"));
+      let elem = document.getElementById(e.target.getAttribute("id"));
+      elem.classList.toggle("unactive");
+      elem.classList.toggle("active");
+      displayFavs(fav);
+    }
+  }
+});
+
+function createFav(elem) {
+  const fav = document.createElement('div');
+
+  fav.className = "favElem";
+  fav.className = "themeContainer";
+  fav.className = "light";
+  fav.innerHTML = `
+    <div class="themeContainer ${theme?"light":"black"}">
+      <h1>${elem}</h1>
+    </div>
+    `;
+  return fav;
+}
+
+function displayFavs(arr) {
+  favList.innerHTML = '';
+  arr.forEach(elem => {
+    favList.appendChild(createFav(elem));
+  });
+}
