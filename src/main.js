@@ -117,18 +117,9 @@ function createBookCard(book) {
             ${year ? `<div class="book_year">Published: ${year}</div>` : ''}
         </div>
     `;
-    
-    // Добавляем клик для открытия страницы книги
-    card.addEventListener('click', () => {
-        if (book.key) {
-            window.open(`https://openlibrary.org${book.key}`, '_blank');
-        }
-    });
-    
-    return card;
+  return card;
 }
 
-// Показать индикатор загрузки
 function showLoading() {
     resultsContainer.innerHTML = `
         <div class="loading" style="grid-column: 1/-1;">
@@ -138,7 +129,6 @@ function showLoading() {
     `;
 }
 
-// Показать сообщение об отсутствии результатов
 function showNoResults(query) {
     resultsContainer.innerHTML = `
         <div class="no_results" style="grid-column: 1/-1;">
@@ -147,7 +137,6 @@ function showNoResults(query) {
     `;
 }
 
-// Показать сообщение об ошибке
 function showError(message) {
     resultsContainer.innerHTML = `
         <div class="error" style="grid-column: 1/-1;">
@@ -156,19 +145,17 @@ function showError(message) {
     `;
 }
 
-// Функция для экранирования HTML специальных символов
+//HTML special symbols
 function escapeHtml(str) {
     const div = document.createElement('div');
     div.textContent = str;
     return div.innerHTML;
 }
 
-// При загрузке страницы показываем популярные книги
 async function loadPopularBooks() {
     showLoading();
     
     try {
-        // Загружаем популярные книги (поиск по популярным запросам)
         const response = await fetch('https://openlibrary.org/search.json?q=fiction&limit=12&sort=rating');
         
         if (!response.ok) {
@@ -189,6 +176,6 @@ async function loadPopularBooks() {
     }
 }
 
-// Загружаем популярные книги при старте
+//Load books at start
 loadPopularBooks();
 

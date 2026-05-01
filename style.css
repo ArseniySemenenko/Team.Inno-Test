@@ -287,6 +287,10 @@ main {
     line-height: 1.3;
 }
 
+.book_title a{
+    text-decoration: none;
+}
+
 .book_author {
     font-size: 14px;
     color: #666;
