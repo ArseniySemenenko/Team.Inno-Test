@@ -179,6 +179,21 @@ async function loadPopularBooks() {
 //Load books at start
 loadPopularBooks();
 
+function displayFavs(arr) {
+  favList.innerHTML = '';
+  arr && arr.forEach(elem => {
+    favList.appendChild(createFav(elem));
+  });
+}
+
+//Fav list
+let favList = document.getElementById("favList");
+
+//Favourites list
+let fav = JSON.parse(localStorage.getItem("fav_list")) || [];
+displayFavs(fav);
+
+
 document.addEventListener('click', (e) => {
   if (e.target.classList.contains("favSwitcher")) {
     if (fav.includes(e.target.getAttribute("id"))) {
@@ -188,6 +203,7 @@ document.addEventListener('click', (e) => {
       //fav.delete(e.target.getAttribute("id"));
       fav = fav.filter(elem => elem != e.target.getAttribute("id"));
       console.log(fav);
+      localStorage.setItem('fav_list', JSON.stringify(fav));
       displayFavs(fav);
     }
     else {
@@ -196,6 +212,7 @@ document.addEventListener('click', (e) => {
       elem.classList.toggle("unactive");
       elem.classList.toggle("active");
       console.log(fav);
+      localStorage.setItem('fav_list', JSON.stringify(fav));
       displayFavs(fav);
     }
   }
@@ -230,15 +247,3 @@ function createFav(elem) {
   return newFav;
 }
 
-function displayFavs(arr) {
-  favList.innerHTML = '';
-  arr.forEach(elem => {
-    favList.appendChild(createFav(elem));
-  });
-}
-
-//Fav list
-let favList = document.getElementById("favList");
-
-//Favourites list
-let fav = [];
