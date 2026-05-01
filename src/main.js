@@ -7,7 +7,7 @@ const theme_button = document.getElementById("theme_button");
 
 //every div thet use theme
 const containers = document.getElementsByClassName("themeContainer");
-//true - light, false - black
+//true - light, false - black (for new elements)
 let theme = true;
 
 // API URL for search
@@ -22,18 +22,6 @@ searchInput.addEventListener('keypress', (e) => {
 });
 theme_button.addEventListener('click', switchTheme);
 
-//Remove side "Favourites" bar when windows width < 800
-//and add back when width > 800
-window.addEventListener('resize', function(){ 
-  let width = window.innerWidth;
-  let favContainer = document.getElementById("favContainer");
-  if (width < 800) {
-    if(favContainer) favContainer.style.display = "none";
-  } else {
-    if (favContainer) favContainer.style.display = "block";
-  }
-});
-
 
 function switchTheme() {
   for (let i of containers) {
@@ -41,7 +29,7 @@ function switchTheme() {
     i.classList.toggle("light");
     i.classList.toggle("black");
   }
-  theme = !theme; //theme for new elements
+  theme = !theme; //toggle theme for new elements
 }
 
 async function performSearch() {
@@ -192,7 +180,6 @@ async function loadPopularBooks() {
 loadPopularBooks();
 
 document.addEventListener('click', (e) => {
-  //alert(e.target.classList.contains("favSwitcher"));
   if (e.target.classList.contains("favSwitcher")) {
     if (fav.has(e.target.getAttribute("id"))) {
       let elem = document.getElementById(e.target.getAttribute("id"));
@@ -223,7 +210,7 @@ function createFav(elem) {
       <div class="fav_elem_img" >
       ${obj.cover 
           ? `<img height="120" width="70" src="${obj.cover}" alt="${obj.title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%25\' height=\'100%25\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23667eea\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'white\' font-size=\'14\'%3ENo Cover%3C/text%3E%3C/svg%3E'">` 
-          : `<div class="fav_no_cover" ><h5>No Cover Available</h5></div>`
+          : `<div class="fav_no_cover" ><p>No Cover Available</p></div>`
       }
       </div>
       <div class="fav_elem_text">
@@ -238,7 +225,6 @@ function createFav(elem) {
     </div>
     `;
   return newFav;
-  //<h1>${obj.title}</h1>
 }
 
 function displayFavs(arr) {
@@ -248,7 +234,7 @@ function displayFavs(arr) {
   });
 }
 
-//Fav bar
+//Fav list
 let favList = document.getElementById("favList");
 
 //Favourites list
