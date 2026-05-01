@@ -1,19 +1,18 @@
-// DOM элементы
+// DOM elements
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const resultsContainer = document.getElementById('resultsContainer');
-
 const theme_button = document.getElementById("theme_button");
 
+//every div thet use theme
 const containers = document.getElementsByClassName("themeContainer");
-//true - light false - black
+//true - light, false - black
 let theme = true;
-//const header = document.getElementsByClassName("header");
 
-// API URL для поиска
+// API URL for search
 const API_URL = 'https://openlibrary.org/search.json';
 
-// Добавляем обработчики событий
+//EventListeners
 searchButton.addEventListener('click', performSearch);
 searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
@@ -22,25 +21,28 @@ searchInput.addEventListener('keypress', (e) => {
 });
 theme_button.addEventListener('click', switchTheme);
 
+//Remove side "Favourites" bar when windows width < 800
+//and add back when width > 800
+window.addEventListener('resize', function(){ 
+  let width = window.innerWidth;
+  let favContainer = document.getElementById("favContainer");
+  if (width < 800) {
+    if(favContainer) favContainer.style.display = "none";
+  } else {
+    if (favContainer) favContainer.style.display = "block";
+  }
+});
+
 
 function switchTheme() {
-  /*const bg = window.getComputedStyle(header).backgroundColor;
-  alerct(bg);
-  if (bg == "rgb(245, 245, 240)") {
-    containers.style.backgroundColor = "#252525";
-    containers.style.color = "white";
-  } else {
-    containers.style.backgroundColor = "#f5f5f0";
-    containers.style.color = "rgb(56, 36, 19)";
-    }*/
   for (let i of containers) {
+    //toggle theme classes
     i.classList.toggle("light");
     i.classList.toggle("black");
   }
-  theme = !theme;
+  theme = !theme; //theme for new elements
 }
 
-// Функция поиска
 async function performSearch() {
     const query = searchInput.value.trim();
     
@@ -49,68 +51,61 @@ async function performSearch() {
         return;
     }
     
-    // Показываем индикатор загрузки
     showLoading();
     
     try {
-        // Делаем запрос к Open Library API
         const response = await fetch(`${API_URL}?q=${encodeURIComponent(query)}&limit=20`);
-        
         if (!response.ok) {
             throw new Error('Failed to fetch books');
         }
-        
         const data = await response.json();
-        
         if (data.docs && data.docs.length > 0) {
             displayBooks(data.docs);
         } else {
             showNoResults(query);
         }
-        
     } catch (error) {
         console.error('Error:', error);
         showError('Failed to load books. Please try again later.');
     }
 }
 
-// Отображение книг
+
 function displayBooks(books) {
     resultsContainer.innerHTML = '';
-    
     books.forEach(book => {
         const bookCard = createBookCard(book);
         resultsContainer.appendChild(bookCard);
     });
 }
 
-// Создание карточки книги
 function createBookCard(book) {
   const card = document.createElement('div');
   card.className = "themeContainer";
   card.className = "light";
   card.className = 'book_card';
     
-    // Получаем обложку книги
+    //Book cover
     const coverId = book.cover_i;
     const coverUrl = coverId 
         ? `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`
         : null;
     
-    // Получаем название (с ограничением длины)
+    //Title (lenght < 50)
     const title = book.title || 'Unknown Title';
     const truncatedTitle = title.length > 50 ? title.substring(0, 47) + '...' : title;
     
-    // Получаем авторов
+    //Authors
     const authors = book.author_name || ['Unknown Author'];
     const author = authors[0];
     
-    // Получаем год публикации
+    //Publication year
     const year = book.first_publish_year || '';
     
-    // Создаём HTML карточки
+    //Create HTML of book card
     card.innerHTML = `
         <div class="book_cover">
+            
             ${coverUrl 
                 ? `<img src="${coverUrl}" alt="${truncatedTitle}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%25\' height=\'100%25\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23667eea\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'white\' font-size=\'14\'%3ENo Cover%3C/text%3E%3C/svg%3E'">` 
                 : `<div class="no_cover"><h1>No Cover Available</h1></div>`
