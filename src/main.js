@@ -221,11 +221,10 @@ function createFav(elem) {
   newFav.innerHTML = `
     <div class="favElem themeContainer ${theme?"light":"black"}">
       <div class="fav_elem_img" >
-        <img
-          src="${obj.cover}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%25\' height=\'100%25\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23667eea\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'white\' font-size=\'14\'%3ENo Cover%3C/text%3E%3C/svg%3E'"
-          height="120"
-          width="70"
-        >
+      ${obj.cover 
+          ? `<img height="120" width="70" src="${obj.cover}" alt="${obj.title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%25\' height=\'100%25\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23667eea\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'white\' font-size=\'14\'%3ENo Cover%3C/text%3E%3C/svg%3E'">` 
+          : `<div class="fav_no_cover" ><h5>No Cover Available</h5></div>`
+      }
       </div>
       <div class="fav_elem_text">
         <h3 class="fav_elem_title">${obj.title.replaceAll("_" , " ")}</h3>
@@ -244,7 +243,6 @@ function createFav(elem) {
 
 function displayFavs(arr) {
   favList.innerHTML = '';
-  console.log(arr);
   arr.forEach(elem => {
     favList.appendChild(createFav(elem));
   });

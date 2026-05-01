@@ -285,10 +285,24 @@ main {
 }
 
 .fav_elem_img{
-    padding-left:10px;
+    margin-left:10px;
+    width: 70px;
+    height: 120px;
+}
+.fav_no_cover{
+    color:white;
+    background-color: #285541;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .fav_elem_img img{
     border-radius: 5px;
+    height: 100%;
+    width: 100%;
 }
 
 .fav_elem_action{
@@ -296,7 +310,7 @@ main {
 }
 
 .fav_elem_text{
-    max-width: 150px;
+    max-width: 200px;
     display: flex;
     justify-content: start;
     flex-direction: column;
@@ -357,6 +371,7 @@ main {
     text-align: center;
     padding: 20px;
 }
+
 
 .book_info {
     padding: 16px;
