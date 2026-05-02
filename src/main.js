@@ -36,7 +36,11 @@ async function performSearch() {
     const query = searchInput.value.trim();
     
     if (!query) {
-      loadPopularBooks();
+      resultsContainer.innerHTML = `
+          <div class="no_results" style="grid-column: 1/-1;">
+              <div><h1>Void Input</h1></div>
+          </div>
+      `;
         return;
     }
     
