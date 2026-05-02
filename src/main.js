@@ -36,7 +36,7 @@ async function performSearch() {
     const query = searchInput.value.trim();
     
     if (!query) {
-        showError('Please enter a book title or author name');
+      loadPopularBooks();
         return;
     }
     
@@ -246,4 +246,34 @@ function createFav(elem) {
     `;
   return newFav;
 }
+
+
+
+
+//modal
+
+let favListModal = document.getElementById("favListModal");
+
+function displayFavsModal(arr) {
+  favListModal.innerHTML = '';
+  arr && arr.forEach(elem => {
+    favListModal.appendChild(createFav(elem));
+  });
+}
+
+let fav_button = document.getElementById("fav_button");
+let modal = document.getElementById("modal");
+fav_button.addEventListener('click', function () {
+  modal.style.display = "flex";
+  displayFavsModal(fav);
+});
+
+modal.addEventListener('click', function (e) {
+  if (e.target.getAttribute("id") == "modal") {
+    modal.style.display = "none";
+  }
+});
+
+
+
 

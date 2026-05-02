@@ -4,6 +4,29 @@
     box-sizing: border-box;
 }
 
+/*Modal Window*/
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 3;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_list{
+    height: 70%;
+    min-width: 70%;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    
+}
+
 /*Black Theme*/
 .black{
     background-color: #252525;
@@ -19,7 +42,7 @@
     flex-shrink: 0;
     height: 60px;
     width: 100%;
-    padding-left: 120px;
+   padding-left: 120px;
     padding-right: 120px;
     display: flex;
     align-items: center;
@@ -30,6 +53,7 @@
 .header_logo {
     display: flex;
     flex-direction: row;
+    min-width: 250px;
 }
 
 .header_buttons{
@@ -38,12 +62,22 @@
     align-items: center;
 }
 
-.header_buttons button {
+#theme_button{
     background-color: #285541;
     color: white;
     border-radius: 15px;
     border: none;
     padding: 15px 25px 15px 25px;
+    margin-right: 5px;
+}
+#fav_button{
+    background-color: #285541;
+    color: white;
+    border-radius: 15px;
+    border: none;
+    padding: 10px 15px 10px 15px;
+
+    display: none;
 }
 
 .header_buttons button:hover{
@@ -192,6 +226,8 @@ main {
 }
 
 .favContainer{
+    padding-bottom:5px;
+    margin-bottom: 20px;
     margin-left: 10px;
     width: 19%;
     min-height: 500px;
@@ -208,6 +244,11 @@ main {
     padding: 15px;
     border-bottom: 1px solid #aeaaa1;
     font-family: "Playfair Display", serif;
+}
+
+.favList{
+    padding-bottom: 10px;
+    border-radius: 10px;
 }
 
 .favIcon{
@@ -507,17 +548,40 @@ main {
     .favContainer{
         display: none;
     }
+    
+    /*Show fav button*/
+    #fav_button{
+        background-color: #285541;
+        color: white;
+        border-radius: 15px;
+        border: none;
+        padding: 10px 15px 10px 15px;
+    
+        display: block;
+    }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+    .header {
+        flex-shrink: 0;
+        height: 60px;
+        width: 100%;
+       padding-left: 50px;
+        padding-right: 50px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #aeaaa1;
+        justify-content: space-between;
+    }
+    .header_logo h5 {
+        color: #aeaaa1;
+        font-family: "Roboto", serif;
+        font-weight: 400;
+        font-size: 10px;
+    }
     .results_container {
         grid-template-columns: 1fr;
     }
-    
-    .title_search {
-        flex-direction: column;
-    }
-    
     .title_search button {
         padding: 12px 25px;
     }

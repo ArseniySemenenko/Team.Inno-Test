@@ -15,6 +15,21 @@
 	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="modal" id="modal">
+        <div class="modal_list themeContainer light">
+            <div class="favTitle ">
+                <div class="favIcon">
+                    <img 
+                        src="./public/heart.png"
+                        height="30"
+                        width="30"
+                    >
+                </div>
+                <h2>Favourites</h2>
+            </div>
+            <div class="favList themeContainer light" id="favListModal"></div>
+        </div>
+    </div>
     <header class="header light themeContainer">
         <div class="header_logo" >
             <div class="logo">
@@ -30,9 +45,12 @@
             </div>
         </div>
         <div class="header_buttons">
-            <button
-                id="theme_button"
-            >Theme</button>
+            <button id="theme_button">
+                Theme
+            </button>
+            <button id="fav_button">
+                <img src="./public/menu.png" height="25" width="25">
+            </button>
         </div>
     </header>
     <main class="themeContainer light">
