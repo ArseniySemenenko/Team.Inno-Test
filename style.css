@@ -587,7 +587,7 @@ main {
     }
     /*Hide fav bar*/;
     .favContainer , .favTitle{
-        display: none;
+        display: none !important;
     }
     
     /*Show fav button*/
@@ -634,7 +634,7 @@ main {
     }
     /*Hide fav bar*/;
     .favContainer , .favTitle{
-        display: none;
+        display: none !important;
     }
     
     /*Show fav button*/
