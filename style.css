@@ -545,7 +545,7 @@ main {
     }
 
     /*Hide fav bar*/;
-    .favContainer{
+    .favContainer , .favTitle{
         display: none;
     }
     
@@ -586,7 +586,7 @@ main {
         padding: 12px 25px;
     }
     /*Hide fav bar*/;
-    .favContainer{
+    .favContainer , .favTitle{
         display: none;
     }
     
@@ -633,7 +633,7 @@ main {
         padding: 12px 25px;
     }
     /*Hide fav bar*/;
-    .favContainer{
+    .favContainer , .favTitle{
         display: none;
     }
     
