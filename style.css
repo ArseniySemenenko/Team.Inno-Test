@@ -588,6 +588,7 @@ main {
     /*Hide fav bar*/;
     .favContainer , .favTitle{
         display: none !important;
+        visibility: none;
     }
     
     /*Show fav button*/
@@ -635,6 +636,7 @@ main {
     /*Hide fav bar*/;
     .favContainer , .favTitle{
         display: none !important;
+        visibility: none;
     }
     
     /*Show fav button*/
