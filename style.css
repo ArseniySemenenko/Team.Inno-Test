@@ -544,109 +544,88 @@ main {
         height: 250px;
     }
 
-    /*Hide fav bar*/;
-    .favContainer , .favTitle{
-        display: none;
+    /* Hide fav bar*/
+    .favContainer, 
+    .favTitle {
+        display: none !important;
     }
     
-    /*Show fav button*/
-    #fav_button{
-        background-color: #285541;
-        color: white;
-        border-radius: 15px;
-        border: none;
-        padding: 10px 15px 10px 15px;
-    
+    /* Show fav button */
+    #fav_button {
         display: block;
     }
 }
 
 @media (max-width: 600px) {
     .header {
-        flex-shrink: 0;
         height: 60px;
         width: 100%;
-       padding-left: 50px;
+        padding-left: 50px;
         padding-right: 50px;
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #aeaaa1;
-        justify-content: space-between;
     }
+    
     .header_logo h5 {
-        color: #aeaaa1;
-        font-family: "Roboto", serif;
-        font-weight: 400;
         font-size: 10px;
     }
-    .results_container {
+
+    .resultsContainer {
         grid-template-columns: 1fr;
     }
+    
     .title_search button {
         padding: 12px 25px;
     }
-    /*Hide fav bar*/;
-    .favContainer , .favTitle{
+    
+    /* Hide fav bar*/
+    .favContainer, 
+    .favTitle {
         display: none !important;
-        visibility: none;
     }
     
-    /*Show fav button*/
-    #fav_button{
-        background-color: #285541;
-        color: white;
-        border-radius: 15px;
-        border: none;
-        padding: 10px 15px 10px 15px;
-    
+    /* Show fav button */
+    #fav_button {
         display: block;
     }
 }
+
 
 @media (max-width: 458px) {
     .header {
-        flex-shrink: 0;
         height: 60px;
         width: 100%;
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #aeaaa1;
-        justify-content: space-between;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     .header_logo {
-        display: flex;
-        flex-direction: row;
-        min-width: 100px;
+        min-width: auto;
     }
 
-    .header_logo h3{
+    .header_logo h3 {
         display: none;
     }
     
     .header_logo h5 {
         display: none;
     }
-    .results_container {
+    
+    .books-container,
+    .resultsContainer {
         grid-template-columns: 1fr;
     }
+    
     .title_search button {
         padding: 12px 25px;
     }
-    /*Hide fav bar*/;
-    .favContainer , .favTitle{
+    
+    /* Hide fav bar*/
+    .favContainer, 
+    .favTitle {
         display: none !important;
-        visibility: none;
     }
     
-    /*Show fav button*/
-    #fav_button{
-        background-color: #285541;
-        color: white;
-        border-radius: 15px;
-        border: none;
-        padding: 10px 15px 10px 15px;
+    /* Show fav button */
+    #fav_button {
         display: block;
     }
 }
-
