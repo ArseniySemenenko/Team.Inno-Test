@@ -2,7 +2,7 @@
 const searchInput = document.getElementById('searchInput');
 const resultsContainer = document.getElementById('resultsContainer');
 const theme_button = document.getElementById("theme_button");
-
+const header_logo = document.getElementById("header_logo");
 
 //every div thet use theme
 const containers = document.getElementsByClassName("themeContainer");
@@ -12,10 +12,21 @@ let theme = true;
 // API URL for search
 const API_URL = 'https://openlibrary.org/search.json';
 
+//Load books, clear input at start
+loadPopularBooks();
+searchInput.value = "";
 
+//Load book, clear input at header logo click
+header_logo.addEventListener('click', function () { 
+  loadPopularBooks();
+  searchInput.value = "";
+});
+
+//Call performSearch with 500ms timeout
 let debSearch = debounce(performSearch, 500);
 searchInput.addEventListener('input', debSearch);
 
+//Switch theme by theme button click
 theme_button.addEventListener('click', switchTheme);
 
 function debounce(callee, timeoutMs) {
@@ -41,6 +52,7 @@ function switchTheme() {
   theme = !theme; //toggle theme for new elements
 }
 
+//searchFunctions
 async function performSearch() {
     const query = searchInput.value.trim();
     
@@ -103,7 +115,7 @@ function createBookCard(book) {
     
     //Publication year
   const year = book.first_publish_year || '';
-
+  
   const book_id = {
     cover: coverUrl,
     title: truncatedTitle.replaceAll(" " , "_"),
@@ -189,9 +201,6 @@ async function loadPopularBooks() {
     }
 }
 
-//Load books at start
-loadPopularBooks();
-
 function displayFavs(arr) {
   favList.innerHTML = '';
   arr && arr.forEach(elem => {
@@ -199,7 +208,7 @@ function displayFavs(arr) {
   });
 }
 
-//Fav list
+//Fav list on page
 let favList = document.getElementById("favList");
 
 //Favourites list
@@ -216,20 +225,18 @@ function refreshFavSwitcher(id) {
   }
 }
 
+//Click on any of switchers
 document.addEventListener('click', (e) => {
   if (e.target.classList.contains("favSwitcher")) {
     if (fav.includes(e.target.getAttribute("id"))) {
-      refreshFavSwitcher(e.target.getAttribute("id"))
-      //fav.delete(e.target.getAttribute("id"));
+      refreshFavSwitcher(e.target.getAttribute("id"));
       fav = fav.filter(elem => elem != e.target.getAttribute("id"));
-      console.log(fav);
       localStorage.setItem('fav_list', JSON.stringify(fav));
       displayFavs(fav);
     }
     else {
       fav.push(e.target.getAttribute("id"));
-      refreshFavSwitcher(e.target.getAttribute("id"))
-      console.log(fav);
+      refreshFavSwitcher(e.target.getAttribute("id"));
       localStorage.setItem('fav_list', JSON.stringify(fav));
       displayFavs(fav);
       if (window.innerWidth < 950) {
@@ -239,6 +246,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
+//Create HTML Favourites element
 function createFav(elem) {
   const newFav = document.createElement('div');
   const obj = JSON.parse(elem);
@@ -271,8 +279,7 @@ function createFav(elem) {
 
 
 
-//modal
-
+//Modal Favourites list 
 let favListModal = document.getElementById("favListModal");
 
 function displayFavsModal(arr) {
@@ -282,15 +289,16 @@ function displayFavsModal(arr) {
   });
 }
 
-let fav_button = document.getElementById("fav_button");
-let modal = document.getElementById("modal");
-fav_button.addEventListener('click', function () {
+let fav_button = document.getElementById("fav_button"); //Show modal Favourites button
+let modal = document.getElementById("modal");//Dark background of modal window
+
+fav_button.addEventListener('click', function () { //Show modal Favourites by button click
   modal.style.display = "flex";
   displayFavsModal(fav);
 });
 
-modal.addEventListener('click', function (e) {
-  if (e.target.getAttribute("id") == "modal") {
+modal.addEventListener('click', function (e) { //Hide modal Favourites by click on dark background
+  if (e.target.getAttribute("id") == "modal") { //To ignore clicks on child elements
     modal.style.display = "none";
   }
 });
