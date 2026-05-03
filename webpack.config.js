@@ -12,7 +12,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html', // Path to your source HTML
+      template: 'index.html', // Path to your source HTML
     }),
     new CopyWebpackPlugin({
           patterns: [
