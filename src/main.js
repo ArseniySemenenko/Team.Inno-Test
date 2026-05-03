@@ -233,15 +233,14 @@ document.addEventListener('click', (e) => {
       fav = fav.filter(elem => elem != e.target.getAttribute("id"));
       localStorage.setItem('fav_list', JSON.stringify(fav));
       displayFavs(fav);
+      displayFavsModal(fav);
     }
     else {
       fav.push(e.target.getAttribute("id"));
       refreshFavSwitcher(e.target.getAttribute("id"));
       localStorage.setItem('fav_list', JSON.stringify(fav));
       displayFavs(fav);
-      if (window.innerWidth < 950) {
-        displayFavsModal(fav);
-      }
+      displayFavsModal(fav);
     }
   }
 });
