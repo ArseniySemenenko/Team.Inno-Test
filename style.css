@@ -545,7 +545,7 @@ main {
     }
 
     /* Hide fav bar*/
-    .favContainer,  {
+    .favContainer {
         display: none !important;
     }
     
@@ -607,7 +607,6 @@ main {
         display: none;
     }
     
-    .books-container,
     .resultsContainer {
         grid-template-columns: 1fr;
     }
