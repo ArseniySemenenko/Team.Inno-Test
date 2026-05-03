@@ -545,8 +545,7 @@ main {
     }
 
     /* Hide fav bar*/
-    .favContainer, 
-    .favTitle {
+    .favContainer,  {
         display: none !important;
     }
     
@@ -577,8 +576,7 @@ main {
     }
     
     /* Hide fav bar*/
-    .favContainer, 
-    .favTitle {
+    .favContainer {
         display: none !important;
     }
     
@@ -619,8 +617,7 @@ main {
     }
     
     /* Hide fav bar*/
-    .favContainer, 
-    .favTitle {
+    .favContainer {
         display: none !important;
     }
     
