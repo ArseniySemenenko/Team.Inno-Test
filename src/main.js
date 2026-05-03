@@ -218,6 +218,10 @@ document.addEventListener('click', (e) => {
       console.log(fav);
       localStorage.setItem('fav_list', JSON.stringify(fav));
       displayFavs(fav);
+      if (window.innerWidth < 500) {
+        window.location.reload();
+      }
+
     }
     else {
       fav.push(e.target.getAttribute("id"));
