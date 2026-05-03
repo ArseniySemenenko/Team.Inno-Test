@@ -601,3 +601,50 @@ main {
         display: block;
     }
 }
+
+@media (max-width: 458px) {
+    .header {
+        flex-shrink: 0;
+        height: 60px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #aeaaa1;
+        justify-content: space-between;
+    }
+
+    .header_logo {
+        display: flex;
+        flex-direction: row;
+        min-width: 100px;
+    }
+
+    .header_logo h3{
+        display: none;
+    }
+    
+    .header_logo h5 {
+        display: none;
+    }
+    .results_container {
+        grid-template-columns: 1fr;
+    }
+    .title_search button {
+        padding: 12px 25px;
+    }
+    /*Hide fav bar*/;
+    .favContainer{
+        display: none;
+    }
+    
+    /*Show fav button*/
+    #fav_button{
+        background-color: #285541;
+        color: white;
+        border-radius: 15px;
+        border: none;
+        padding: 10px 15px 10px 15px;
+        display: block;
+    }
+}
+
