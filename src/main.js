@@ -301,7 +301,3 @@ modal.addEventListener('click', function (e) { //Hide modal Favourites by click 
     modal.style.display = "none";
   }
 });
-
-
-
-

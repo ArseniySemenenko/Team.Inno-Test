@@ -567,6 +567,10 @@ main {
         font-size: 10px;
     }
 
+    .title_text h5 {
+        display: none;
+    }
+
     .resultsContainer {
         grid-template-columns: 1fr;
     }
@@ -597,6 +601,10 @@ main {
 
     .header_logo {
         min-width: auto;
+    }
+
+    .title_text h5 {
+        display: none;
     }
 
     .header_logo h3 {
