@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../style.css">
+	<title>BookSearch</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="modal" id="modal">
+        <div class="modal_list themeContainer light">
+            <div class="favTitle ">
+                <div class="favIcon">
+                    <img 
+                        src="../public/heart.png"
+                        height="30"
+                        width="30"
+                    >
+                </div>
+                <h2>Favourites</h2>
+            </div>
+            <div class="favList themeContainer light" id="favListModal"></div>
+        </div>
+    </div>
+    <header class="header light themeContainer">
+        <div class="header_logo" >
+            <div class="logo">
+                <img 
+                    src="../public/book.png"
+                    height="30"
+                    width="30"
+                >
+            </div>
+            <div>
+                <h3>The Library</h3>
+                <h5>Discover your next favourite book</h5>
+            </div>
+        </div>
+        <div class="header_buttons">
+            <button id="theme_button">
+                Theme
+            </button>
+            <button id="fav_button">
+                <img src="../public/menu.png" height="25" width="25">
+            </button>
+        </div>
+    </header>
+    <main class="themeContainer light">
+        <div class="main_title">
+            <div class="title_text themeContainer light">
+                <div>
+                    <h1>Discover Your Next Great Read</h1>
+                </div>
+                <div>
+                    <h5>Search millions of books, build your personal library, and never lose track of<br> what to read next</h5>
+                </div>
+            </div>
+            <div class="title_search">
+                <input 
+                    id="searchInput"
+                    type="text" 
+                    placeholder="Seacrh for books by title or author"
+                />
+            </div>
+        </div>
+        
+        <div class="main_container">
+            <div class="main_wrapper">
+                <div class="resultsContainer" id="resultsContainer">
+                </div>
+                <div class="favContainer themeContainer light" id="favContainer">
+                    <div class="favTitle ">
+                        <div class="favIcon">
+                            <img 
+                                src="../public/heart.png"
+                                height="30"
+                                width="30"
+                            >
+                        </div>
+                        <h2>Favourites</h2>
+                    </div>
+                    <div class="favList themeContainer light" id="favList"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="themeContainer light">
+        <h5>Powered by <a href="https://openlibrary.org/" target="_blank">Open Library</a></h5>
+    </footer>
+    <script src="./main.js"></script>
+</body>
+</html>
+

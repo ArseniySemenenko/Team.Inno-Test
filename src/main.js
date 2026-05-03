@@ -1,6 +1,5 @@
 // DOM elements
 const searchInput = document.getElementById('searchInput');
-const searchButton = document.getElementById('searchButton');
 const resultsContainer = document.getElementById('resultsContainer');
 const theme_button = document.getElementById("theme_button");
 
@@ -13,15 +12,25 @@ let theme = true;
 // API URL for search
 const API_URL = 'https://openlibrary.org/search.json';
 
-//EventListeners
-searchButton.addEventListener('click', performSearch);
-searchInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        performSearch();
-    }
-});
+
+let debSearch = debounce(performSearch, 500);
+searchInput.addEventListener('input', debSearch);
+
 theme_button.addEventListener('click', switchTheme);
 
+function debounce(callee, timeoutMs) {
+  return function perform(...args) {
+    let previousCall = this.lastCall
+
+    this.lastCall = Date.now()
+
+    if (previousCall && this.lastCall - previousCall <= timeoutMs) {
+      clearTimeout(this.lastCallTimer)
+    }
+
+    this.lastCallTimer = setTimeout(() => callee(...args), timeoutMs)
+  }
+}
 
 function switchTheme() {
   for (let i of containers) {
