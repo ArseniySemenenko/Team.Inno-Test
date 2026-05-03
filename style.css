@@ -585,4 +585,19 @@ main {
     .title_search button {
         padding: 12px 25px;
     }
+    /*Hide fav bar*/;
+    .favContainer{
+        display: none;
+    }
+    
+    /*Show fav button*/
+    #fav_button{
+        background-color: #285541;
+        color: white;
+        border-radius: 15px;
+        border: none;
+        padding: 10px 15px 10px 15px;
+    
+        display: block;
+    }
 }
