@@ -206,31 +206,35 @@ let favList = document.getElementById("favList");
 let fav = JSON.parse(localStorage.getItem("fav_list")) || [];
 displayFavs(fav);
 
+function refreshFavSwitcher(id) {
+  let favSwitchers = document.getElementsByClassName('favSwitcher');
+  for (let i of favSwitchers) {
+    if (i.getAttribute("id") == id) {
+      i.classList.toggle("unactive");
+      i.classList.toggle("active");
+    }
+  }
+}
 
 document.addEventListener('click', (e) => {
   if (e.target.classList.contains("favSwitcher")) {
     if (fav.includes(e.target.getAttribute("id"))) {
-      let elem = document.getElementById(e.target.getAttribute("id"));
-      elem.classList.toggle("unactive");
-      elem.classList.toggle("active");
+      refreshFavSwitcher(e.target.getAttribute("id"))
       //fav.delete(e.target.getAttribute("id"));
       fav = fav.filter(elem => elem != e.target.getAttribute("id"));
       console.log(fav);
       localStorage.setItem('fav_list', JSON.stringify(fav));
       displayFavs(fav);
-      if (window.innerWidth < 500) {
-        window.location.reload();
-      }
-
     }
     else {
       fav.push(e.target.getAttribute("id"));
-      let elem = document.getElementById(e.target.getAttribute("id"));
-      elem.classList.toggle("unactive");
-      elem.classList.toggle("active");
+      refreshFavSwitcher(e.target.getAttribute("id"))
       console.log(fav);
       localStorage.setItem('fav_list', JSON.stringify(fav));
       displayFavs(fav);
+      if (window.innerWidth < 950) {
+        displayFavsModal(fav);
+      }
     }
   }
 });
